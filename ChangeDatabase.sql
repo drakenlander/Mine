@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS [DimenRealEstate];
+CREATE DATABASE [DimenRealEstate];
