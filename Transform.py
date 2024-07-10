@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from sqlalchemy import text
 
 server = 'localhost'
 database = 'StagingRealEstate'
@@ -7,6 +8,11 @@ driver = 'ODBC Driver 17 for SQL Server'
 
 connection_string = f'mssql+pyodbc://@{server}/{database}?driver={driver}&trusted_connection=yes'
 engine = create_engine(connection_string)
+
+with engine.connect() as conn:
+    with open("Create.sql") as file:
+        query = text(file.read())
+        conn.execute(query)
 
 with open('Query.sql', 'r') as file:
     query = file.read()
